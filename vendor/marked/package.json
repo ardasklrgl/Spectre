@@ -1,0 +1,53 @@
+{
+  "name": "marked",
+  "description": "A markdown parser built for speed",
+  "author": "Christopher Jeffrey",
+  "version": "18.0.5",
+  "type": "module",
+  "main": "./lib/marked.esm.js",
+  "module": "./lib/marked.esm.js",
+  "browser": "./lib/marked.umd.js",
+  "types": "./lib/marked.d.ts",
+  "bin": {
+    "marked": "bin/marked.js"
+  },
+  "man": "./man/marked.1",
+  "files": [
+    "bin/",
+    "lib/",
+    "man/"
+  ],
+  "exports": {
+    ".": {
+      "types": "./lib/marked.d.ts",
+      "default": "./lib/marked.esm.js"
+    },
+    "./bin/marked": "./bin/marked.js",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/markedjs/marked.git"
+  },
+  "homepage": "https://marked.js.org",
+  "bugs": {
+    "url": "http://github.com/markedjs/marked/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "markdown",
+    "markup",
+    "html"
+  ],
+  "tags": [
+    "markdown",
+    "markup",
+    "html"
+  ],
+  "engines": {
+    "node": ">= 20"
+  }
+}

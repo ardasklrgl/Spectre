@@ -1,0 +1,31 @@
+{
+  "identifier": "main",
+  "windows": [
+    "main",
+    "study"
+  ],
+  "permissions": [
+    "core:default",
+    "core:window:allow-set-size",
+    "core:window:allow-start-dragging",
+    "dialog:allow-open",
+    "dialog:allow-confirm",
+    {
+      "identifier": "opener:allow-open-url",
+      "allow": [
+        {
+          "url": "https://*"
+        },
+        {
+          "url": "http://*"
+        },
+        {
+          "url": "mailto:*"
+        }
+      ]
+    },
+    "core:window:allow-start-resize-dragging",
+    "core:window:allow-set-resizable",
+    "dialog:allow-save"
+  ]
+}
