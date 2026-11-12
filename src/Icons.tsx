@@ -1,3 +1,150 @@
-const icons={'brand':<><path d="M6 3h12a2 2 0 0 1 2 2v12l-4 4H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M16 21v-4h4M8 8h8M8 12h6"/></>,'note':<><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></>,'x':<><path d="m7 7 10 10M17 7 7 17"/></>,'plus':<><path d="M12 5v14M5 12h14"/></>,'arrow':<><path d="M12 18V6m-5 5 5-5 5 5"/></>,'more':<><circle cx="5" cy="12" r=".8"/><circle cx="12" cy="12" r=".8"/><circle cx="19" cy="12" r=".8"/></>,'grip':<><path d="M4 4h.1M8 4h.1M4 9h.1M8 9h.1M4 14h.1M8 14h.1"/></>,'resize':<><path d="m3 10 7-7M7 10l3-3"/></>,'bold':<><path d="M7 12h6a4 4 0 0 1 0 8H7V4h5a4 4 0 0 1 0 8"/></>,'italic':<><path d="M10 4h9M5 20h9M15 4 9 20"/></>,'underline':<><path d="M6 4v8a6 6 0 0 0 12 0V4M4 21h16"/></>,'list':<><path d="M9 6h11M9 12h11M9 18h11M4 6h.1M4 12h.1M4 18h.1"/></>,'number':<><path d="M10 6h10M10 12h10M10 18h10M4 3v6M3 4l1-1M3 9h2M3 14c0-2 3-2 3 0 0 1-3 3-3 5h3"/></>,'code':<><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></>,'check':<><path d="m5 12 4 4L19 6"/></>,'search':<><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></>,'history':<><path d="M3 11a9 9 0 1 1 2 7M3 4v7h7M12 7v5l3 2"/></>,'file':<><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8l-5-5Zm0 0v5h5M9 13h6M9 17h5"/></>,'image':<><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8" cy="9" r="1.5"/><path d="m3 17 5-5 4 4 4-5 5 6"/></>,'screen':<><path d="M8 3H4v4M16 3h4v4M4 16v4h4M20 16v4h-4"/><rect x="8" y="8" width="8" height="8" rx="1"/></>,'attach':<><path d="m8 13 7-7a3 3 0 0 1 4 4L9 20a5 5 0 0 1-7-7L13 2m-9 13 9-9" transform="translate(2 1) scale(.85)"/></>,'copy':<><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M15 8V3H3v13h5"/></>,'trash':<><path d="M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></>,'link':<><path d="m9 15 6-6M14 5l2-2a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-5 0M10 19l-2 2a4 4 0 0 1-6-6l5-5a4 4 0 0 1 5 0" transform="translate(1 0) scale(.9)"/></>,'reset':<><path d="M4 9a8 8 0 1 1 0 7M4 3v6h6"/></>,'layout':<><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></>,'chevron':<><path d="m9 5 7 7-7 7"/></>,'back':<><path d="m14 5-7 7 7 7M7 12h14"/></>};
-export type IconName=keyof typeof icons;
-export function Icon({name}:{name:IconName}){return <svg viewBox={name==='grip'?'0 0 12 18':name==='resize'?'0 0 12 12':'0 0 24 24'} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{icons[name]}</svg>}
+type FigmaIconName =
+  | "arrow"
+  | "bold"
+  | "bullet"
+  | "capture"
+  | "check"
+  | "chevron"
+  | "close"
+  | "copy"
+  | "file"
+  | "grip"
+  | "history"
+  | "image"
+  | "indent"
+  | "italic"
+  | "link"
+  | "more"
+  | "note"
+  | "numbered"
+  | "plus"
+  | "search"
+  | "settings"
+  | "trash"
+  | "underline";
+
+const paths: Record<FigmaIconName, React.ReactNode> = {
+  arrow: (
+    <>
+      <path d="M4 8h8M9 5l3 3-3 3" />
+    </>
+  ),
+  bold: (
+    <>
+      <path d="M5 3h3.5a2.5 2.5 0 0 1 0 5H5zM5 8h4a2.5 2.5 0 0 1 0 5H5z" />
+    </>
+  ),
+  bullet: (
+    <>
+      <path d="M6.5 4h6M6.5 8h6M6.5 12h6" />
+      <circle cx="3" cy="4" r=".7" fill="currentColor" stroke="none" />
+      <circle cx="3" cy="8" r=".7" fill="currentColor" stroke="none" />
+      <circle cx="3" cy="12" r=".7" fill="currentColor" stroke="none" />
+    </>
+  ),
+  capture: (
+    <>
+      <path d="M4 6V4h2M10 4h2v2M12 10v2h-2M6 12H4v-2" />
+      <path d="M6.5 8h3" />
+    </>
+  ),
+  check: <path d="m3.5 8 3 3 6-6" />,
+  chevron: <path d="m5.5 6.5 2.5 3 2.5-3" />,
+  close: <path d="m4.5 4.5 7 7m0-7-7 7" />,
+  copy: (
+    <>
+      <rect x="5.5" y="5.5" width="7" height="7" rx="1.2" />
+      <path d="M10.5 5.5v-2h-7v7h2" />
+    </>
+  ),
+  file: (
+    <>
+      <path d="M4 2.5h5l3 3v8H4z" />
+      <path d="M9 2.5v3h3" />
+    </>
+  ),
+  grip: (
+    <>
+      <path d="M5.5 5.5h.01M10.5 5.5h.01M5.5 10.5h.01M10.5 10.5h.01" strokeWidth="2.4" />
+    </>
+  ),
+  history: (
+    <>
+      <circle cx="8" cy="8" r="5.5" />
+      <path d="M8 5v3l2 1.5" />
+    </>
+  ),
+  image: (
+    <>
+      <rect x="2.5" y="3" width="11" height="10" rx="1.5" />
+      <circle cx="6" cy="6.5" r="1" />
+      <path d="m3 11 3-3 2.2 2 1.5-1.5L13 12" />
+    </>
+  ),
+  indent: (
+    <>
+      <path d="M6 4h7M8 8h5M6 12h7M3 6l2 2-2 2" />
+    </>
+  ),
+  italic: (
+    <>
+      <path d="M7 3h5M4 13h5M9.5 3l-3 10" />
+    </>
+  ),
+  link: (
+    <>
+      <path d="M6.5 9.5 9.5 6M6.5 11H5a3 3 0 0 1 0-6h2M9.5 5H11a3 3 0 0 1 0 6H9" />
+    </>
+  ),
+  more: (
+    <>
+      <circle cx="3.5" cy="8" r=".8" fill="currentColor" stroke="none" />
+      <circle cx="8" cy="8" r=".8" fill="currentColor" stroke="none" />
+      <circle cx="12.5" cy="8" r=".8" fill="currentColor" stroke="none" />
+    </>
+  ),
+  note: (
+    <>
+      <path d="M3.5 2.5h9v11h-9z" />
+      <path d="M6 6h4M6 8.5h4M6 11h2.5" />
+    </>
+  ),
+  numbered: (
+    <>
+      <path d="M7 4h6M7 8h6M7 12h6M2.5 3.5h1v2M2.5 8h1l-1 2h1M2.5 12h1c.5 0 .5 1 0 1h-1" />
+    </>
+  ),
+  plus: <path d="M8 3.5v9M3.5 8h9" />,
+  search: (
+    <>
+      <circle cx="7" cy="7" r="4" />
+      <path d="m10 10 3 3" />
+    </>
+  ),
+  settings: (
+    <>
+      <circle cx="8" cy="8" r="2.2" />
+      <path d="M8 2.5v1.2M8 12.3v1.2M2.5 8h1.2M12.3 8h1.2M4.1 4.1l.9.9M11 11l.9.9M11.9 4.1l-.9.9M5 11l-.9.9" />
+    </>
+  ),
+  trash: (
+    <>
+      <path d="M3.5 5h9M6 5V3.5h4V5M5 5l.5 8h5l.5-8" />
+    </>
+  ),
+  underline: (
+    <>
+      <path d="M4.5 3v4a3.5 3.5 0 0 0 7 0V3M3.5 13h9" />
+    </>
+  ),
+};
+
+const aliases:Partial<Record<IconName,FigmaIconName>>={x:'close',list:'bullet',number:'numbered',screen:'capture',attach:'file',layout:'settings',back:'arrow'};
+export type IconName=FigmaIconName|'x'|'list'|'number'|'screen'|'attach'|'layout'|'back'|'resize';
+export function Icon({ name, size = 16 }: { name: IconName; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" aria-hidden="true">
+      {name==='resize'?<path d="m5 13 8-8M9 13l4-4"/>:paths[aliases[name]??name as FigmaIconName]}
+    </svg>
+  );
+}

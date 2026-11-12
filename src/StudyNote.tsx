@@ -86,15 +86,15 @@ export function StudyNote() {
   return <main className="study-window" onKeyDown={e => {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); void save().catch(fail); }
   }}>
-    <section className="study-note" aria-label="Study notepad">
-      <div className="study-titlebar" onMouseDown={e => {
+    <section className="study-note app-surface" aria-label="Study notepad">
+      <div className="study-titlebar window-head" onMouseDown={e => {
         if (e.button === 0 && isTauri() && !(e.target as HTMLElement).closest('button')) {
           e.preventDefault(); void getCurrentWindow().startDragging().catch(fail);
         }
       }}>
-        <span className="window-title"><Icon name="note"/>Study note</span><div className="head-actions"><button className="icon note-more" aria-label="Note options" aria-expanded={menu} onClick={()=>setMenu(!menu)}><Icon name="more"/></button><button className="icon" aria-label="Hide study note" title="Hide · ⌘⇧N" onClick={()=>void hide()}><Icon name="x"/></button></div>
+        <span className="window-title"><Icon name="note"/>Study note</span><div className="head-actions"><button className="icon note-more" aria-label="More options" aria-expanded={menu} onClick={()=>setMenu(!menu)}><Icon name="more"/></button><button className="icon" aria-label="Hide study note" title="Hide · ⌘⇧N" onClick={()=>void hide()}><Icon name="x"/></button></div>
       </div>
-      {menu&&<div className="menu note-menu"><button onClick={()=>{const next={...appearance,toolbar:!appearance.toolbar};saveAppearance(next);setAppearance(next);if(isTauri())void import('@tauri-apps/api/event').then(({emit})=>emit('study-appearance',next));setMenu(false)}}><Icon name="layout"/>{appearance.toolbar?'Hide':'Show'} formatting bar</button><button onClick={()=>{if(isTauri()){void (async()=>{const path=await saveDialog({defaultPath:'Study-note.md',filters:[{name:'Markdown',extensions:['md']}]});if(path){await flush();await invoke('export_study_note',{path})}})().catch(fail)}else{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([value.current.markdown],{type:'text/markdown'}));a.download='Study-note.md';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}setMenu(false)}}><Icon name="file"/>Export Markdown</button><button onClick={()=>{editor.current?.undo();setMenu(false)}}>Undo</button><button onClick={()=>{editor.current?.redo();setMenu(false)}}>Redo</button></div>}
+      {menu&&<div className="menu note-menu"><button onClick={()=>{const next={...appearance,toolbar:!appearance.toolbar};saveAppearance(next);setAppearance(next);if(isTauri())void import('@tauri-apps/api/event').then(({emit})=>emit('study-appearance',next));setMenu(false)}}>{appearance.toolbar?<Icon name="check"/>:<span/>}<span>Show formatting bar</span></button><button onClick={()=>{if(isTauri()){void (async()=>{const path=await saveDialog({defaultPath:'Study-note.md',filters:[{name:'Markdown',extensions:['md']}]});if(path){await flush();await invoke('export_study_note',{path})}})().catch(fail)}else{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([value.current.markdown],{type:'text/markdown'}));a.download='Study-note.md';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}setMenu(false)}}><Icon name="file"/><span>Export note…</span></button><div className="menu-rule"/><button onClick={()=>{if(isTauri())void invoke('navigate',{view:'settings'}).catch(fail);setMenu(false)}}><Icon name="settings"/><span>Settings</span></button></div>}
       <RichStudyEditor ref={editor} initial={initial} toolbar={appearance.toolbar} size={appearance.size} onWords={setWords} onError={e=>setError(String(e))} onChange={next=>{
         value.current=next;revision.current+=1;setStatus('Saving…');clearTimeout(timer.current);timer.current=setTimeout(()=>{void save().catch(fail)},200);
       }}/>

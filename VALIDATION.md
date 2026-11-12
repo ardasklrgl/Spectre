@@ -33,3 +33,9 @@ Compact-spacing/Tab revision: frontend build passed. Real DOM keydown tests pass
 - Fixed empty-note hydration using an explicit empty paragraph document.
 - Added recoverable delete/restore and a Rust regression test; Rust unavailable here, so this test and native compilation are NOT run for this revision.
 - Fullscreen, global shortcuts, native drag/resize and export dialog require macOS testing.
+
+## Figma Make export adoption
+
+- Uses exported 16px icon paths, capture grid, neutral grey palette, 100px Paragraph control, 26px note status strip, compact history rows and grouped settings.
+- Retains Tiptap, Rust persistence and native window commands.
+- Frontend build and rich editor checks pass; native macOS build not run in this Linux environment.

@@ -2,9 +2,9 @@
 
 A custom dark capture composer built with React, TypeScript and Tauri 2. Rust owns storage, drafts and desktop integration. The Swift demo remains available in the parent project.
 
-## Design-demo implementation
+## Figma export implementation
 
-The capture, study note, history and settings use the approved demo's charcoal palette, system font, outline icons, control spacing, radii and layout. Capture is 420 × 64, history 860 × 560, settings 660 × 480, and a new study note 440 × 468 logical pixels. Existing notes keep their remembered geometry. The browser review canvas, PDF backdrop and tabs are excluded from the app.
+The capture, study note, history and settings use your uploaded Figma Make export’s charcoal palette, system font, outline icons, control spacing, radii and layout. Capture is 420 × 64, history 860 × 560, settings 660 × 480, and a new study note 440 × 468 logical pixels. Existing notes keep their remembered geometry. The browser review canvas, PDF backdrop and tabs are excluded from the app.
 
 Study notes retain continuous rich editing and zero extra paragraph spacing. The note's overflow menu hides the toolbar, exports Markdown, and offers undo/redo. Settings controls text size and toolbar visibility. History offers All/Text/Files filters and recoverable deletion: Undo restores a capture from the local Trash directory.
 
@@ -95,3 +95,5 @@ The editor loads only in the study window. Capture/history and their keyboard sh
 Run editor checks with `node scripts/test-rich-editor.mjs`. These exercise the real editor in a DOM environment: importing headings/tasks/tables/code, selected-text formatting, JSON roundtrip, cross-paragraph replacement, undo/redo and paragraph creation. Native macOS pointer/keyboard feel and fullscreen operation still require a live check. The old live-Markdown source files/tests remain as reference; they are not mounted in the study window.
 
 Study editor spacing: body text uses 1.2 line height with zero paragraph margins, so Enter has the same spacing as a wrapped line. Tab inserts a four-column tab in normal text/code and indents list items; Shift–Tab reverses indentation. Table cell navigation remains standard. Tab from editor text does not move focus to the toolbar or another app.
+
+The Figma-exported component and stylesheet are retained unchanged under `docs/figma-export/` as the visual reference. The native app reuses its 16px icon paths and CSS, with window-positioning overrides for Tauri. The PDF backdrop and sample captures are presentation fixtures, not saved app data.

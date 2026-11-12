@@ -36,11 +36,11 @@ export const RichStudyEditor=forwardRef<RichStudyHandle,Props>(function RichStud
     {label:'Underline',icon:'underline' as const,active:state?.underline,action:(e:Editor)=>e.chain().focus().toggleUnderline().run()},
     {label:'Bullet list',icon:'list' as const,active:state?.bullets,action:(e:Editor)=>e.chain().focus().toggleBulletList().run()},
     {label:'Numbered list',icon:'number' as const,active:state?.numbered,action:(e:Editor)=>e.chain().focus().toggleOrderedList().run()},
-    {label:'Indent',icon:'chevron' as const,active:false,action:(e:Editor)=>{e.chain().focus().sinkListItem(e.isActive('taskItem')?'taskItem':'listItem').run()}},
+    {label:'Indent',icon:'indent' as const,active:false,action:(e:Editor)=>{e.chain().focus().sinkListItem(e.isActive('taskItem')?'taskItem':'listItem').run()}},
   ];
   return <div className="study-rich-shell" style={{'--note-size':`${size}px`} as React.CSSProperties}>
     {toolbar&&<div className="note-tools study-rich-toolbar" role="toolbar" aria-label="Text formatting">
-      <select className="text-style" aria-label="Paragraph style" disabled={!available} value={editor?.isActive('heading',{level:1})?'1':editor?.isActive('heading',{level:2})?'2':editor?.isActive('heading',{level:3})?'3':'p'} onChange={event=>run(e=>{const v=event.target.value;if(v==='p')e.chain().focus().setParagraph().run();else e.chain().focus().setHeading({level:Number(v) as 1|2|3}).run()})}><option value="p">Text</option><option value="1">Title</option><option value="2">Heading</option><option value="3">Subheading</option></select><span className="divider"/>
+      <select className="text-style" aria-label="Paragraph style" disabled={!available} value={editor?.isActive('heading',{level:1})?'1':editor?.isActive('heading',{level:2})?'2':editor?.isActive('heading',{level:3})?'3':'p'} onChange={event=>run(e=>{const v=event.target.value;if(v==='p')e.chain().focus().setParagraph().run();else e.chain().focus().setHeading({level:Number(v) as 1|2|3}).run()})}><option value="p">Paragraph</option><option value="1">Title</option><option value="2">Heading</option><option value="3">Subheading</option></select><span className="divider"/>
       {tools.map((tool,i)=><span className="tool-slot" key={tool.label}>{i===3&&<span className="divider"/>}<button className="icon" type="button" title={tool.label} aria-label={tool.label} aria-pressed={!!tool.active} disabled={!available} onMouseDown={e=>e.preventDefault()} onClick={()=>run(tool.action)}><Icon name={tool.icon}/></button></span>)}
     </div>}
     <div ref={scroll} className="study-rich-scroll" onClick={e=>{if(e.target===e.currentTarget)run(e=>{e.commands.focus('end')})}}>
